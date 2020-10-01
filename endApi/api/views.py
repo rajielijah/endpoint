@@ -88,7 +88,7 @@ class PostView(viewsets.ModelViewSet):
     lookup_field = 'id' 
     queryset = Post.objects.all()
     serializer_class =PostSerializer
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticated,)
     authentication_classes = (TokenAuthentication, )
     pagination_class = PageNumberPagination
 
