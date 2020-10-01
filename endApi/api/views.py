@@ -65,7 +65,7 @@ class ProfileView(viewsets.ModelViewSet):
     lookup_field = 'id' 
     queryset = Profile.objects.all()
     serializer_class =ProfileSerializer
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
 
 
     # def perform_create(self, serializer):
@@ -80,7 +80,7 @@ class ProfileView(viewsets.ModelViewSet):
 
 # class UserDetail(RetrieveAPIView):
 #     lookup_field = 'username'
-#     queryset = User.objects.all()
+#     queryset = User.objects.all()get_latest_by = "order_date"
 #     serializer_class =UserSerializer
 #     permission_classes = (permissions.AllowAny,)
 

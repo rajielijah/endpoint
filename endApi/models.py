@@ -35,17 +35,19 @@ class Post(models.Model):
 
     def __str__(self):
         return self.product_name
+    class Meta:
+        ordering = ['-posted_on']
 
 
 class Profile(models.Model):
-    avatar = models.ImageField(null=False)
+    avatar = models.ImageField(null=True)
     company_name = models.CharField(max_length=100)
     name  = models.CharField(max_length=300)
     phone  = models.CharField(max_length=100)
     whatsapp = models.CharField(max_length=11)
     location  = models.CharField(max_length=40)
     state = models.CharField (max_length=200)
-    user  = models.OneToOneField(User, default=None, null=True, on_delete=models.CASCADE)
+    user  = models.OneToOneField(User, default=None, null=True, blank=True, on_delete=models.CASCADE)
     date_joined  = models.DateTimeField(auto_now_add=True)
     bio  = models.CharField(max_length=300, null=True, blank=False)
     gender  = models.CharField(max_length=10, choices=GENDER_CHOICES)

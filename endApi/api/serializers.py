@@ -65,25 +65,27 @@ class AuthorPostSerializer(serializers.ModelSerializer):
         model = Profile
         fields = ('id', 'avatar','name')
 
+
+
+class UserSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password', ]
+
+
 class ProfileSerializer(serializers.ModelSerializer):
-    # user = serializers.SlugRelatedField(read_only=True, slug_field='username')
+    user = UserSerializer(read_only=True) 
     class Meta:
         model = Profile
-        fields = ('id', 'avatar', 'name', 'phone', 'whatsapp', 'bio', 'gender', 'location', 'state',  'user' )
-
+        fields = ('id', 'avatar', 'name', 'company_name', 'phone', 'whatsapp', 'bio', 'gender', 'location', 'state',  'user' )
 
 class PostSerializer(serializers.ModelSerializer):   
-    author  = AuthorPostSerializer(read_only=True)
+    author  = ProfileSerializer(read_only=True)
     class Meta:
         model  = Post
         fields = ( 'id', 'author',  'category', 'product_name', 'price','product_description', 'product_details',  'image', 'posted_on')
 
-
-class UserSerializer(serializers.ModelSerializer):
-    profile = ProfileSerializer()
-    class Meta:
-        model = User
-        fields = ['username', 'email', 'password', 'profile']
 
 class ChangePasswordSerializer(serializers.Serializer):
     model = User
